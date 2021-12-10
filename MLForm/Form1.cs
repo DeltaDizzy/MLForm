@@ -16,7 +16,7 @@ namespace MLForm
             {
                 FileInfo fi = new FileInfo(openFileDialog.FileName);
                 File.Copy(Path.Combine(openFileDialog.FileName), ProjectFolders.inputDir.FullName + $"{fi.Name}_ML{fi.Extension}");
-
+                pbFresh.Image = new Bitmap(Path.Combine(ProjectFolders.inputDir.FullName, $"{fi.Name}_ML{fi.Extension}")) as Image;
             }
         }
     }
