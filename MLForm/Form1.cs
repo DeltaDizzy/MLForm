@@ -64,8 +64,20 @@ namespace MLForm
         private void BtnDetect_Click(object sender, EventArgs e)
         {
             Bitmap src = pbFresh.Image as Bitmap ?? new Bitmap(1,1) { Tag="null source image" };
+            MLProcessData startState = new()
+            {
+                Model = null,
+                Results = null,
+                Image = src,
+                ModelPath = Form1.modelPath,
+                InputPath = inputDir.FullName,
+                OutputPath = outputDir.FullName,
+                NextStage = MLProcessData.MLStage.MLExecutor
+            };
+            MLProcessData endState = MLExecutor.Start(startState);
             MLExecutor.Run(modelPath, inputDir.FullName, outputDir.FullName, out Bitmap dst);
             pbMLd.Image = dst;
+            //pbMLd.Image = endState.image;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace MLForm.MLModel
 {
     public class MLExecutor
     {
+
         private static readonly string[] _classNames = new string[] 
         {
             "person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant", "stop sign", "parking meter",
@@ -17,9 +18,16 @@ namespace MLForm.MLModel
             "refrigerator", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush" 
         };
 
-        public static void Run(string modelPath, string inputPath, string outputPath, out Bitmap bm)
+        
+
+        public static MLProcessData Start(MLProcessData state)
         {
             List<Bitmap> predictedImages = new();
+        }
+
+        public static void Run(string modelPath, string inputPath, string outputPath, out Bitmap bm)
+        {
+            
             Trainer trainer = new();
             // build and train model
             ITransformer? trainedModel = trainer.ApplyModel(modelPath);
@@ -34,7 +42,7 @@ namespace MLForm.MLModel
                 {
                     ImagePrediction prediction = predictor.Predict(img);
                     IReadOnlyList<Result> results = prediction.GetResults(_classNames);
-                    predictedImages.Add( new Bitmap(DrawResults.Draw(results, img)));
+                    predictedImages.Add(new Bitmap(Annotator.Draw(results, img)));
                 }
             }
             bm = predictedImages.FirstOrDefault() ?? new Bitmap(1,1) { Tag = "Predict=0" };

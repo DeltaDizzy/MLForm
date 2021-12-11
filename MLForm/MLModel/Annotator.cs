@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MLtest
 {
-    public static class DrawResults
+    public static class Annotator
     {
         public static Bitmap Draw(IReadOnlyList<Result> results, Bitmap image)
         {
@@ -22,7 +22,7 @@ namespace MLtest
                     var x2 = result.BoundingBox[2];
                     var y2 = result.BoundingBox[3];
 
-                    graphics.DrawRectangle(Pens.Red, x1, y1, x2 - x1, y2 - y1);
+                    graphics.DrawRectangle(new Pen(result.Color), x1, y1, x2 - x1, y2 - y1);
 
                     using (var brushes = new SolidBrush(Color.FromArgb(50, Color.Red)))
                     {

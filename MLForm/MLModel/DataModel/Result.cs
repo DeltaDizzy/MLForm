@@ -17,11 +17,17 @@
         /// </summary>
         public float Confidence { get; }
 
-        public Result(float[] boundingBox, string label, float confidence)
+        /// <summary>
+        /// Bounding Box Color
+        /// </summary>
+        public Color Color { get; }
+
+        public Result(float[] boundingBox, string label, float confidence, Color color)
         {
             BoundingBox = boundingBox;
             Label = label;
             Confidence = confidence;
+            Color = Color.Red;
         }
     }
 }

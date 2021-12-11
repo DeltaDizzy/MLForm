@@ -1,4 +1,5 @@
 ﻿using Microsoft.ML;
+using MLForm.MLModel;
 using MLtest.DataModel;
 using MLtest.DataStructures;
 using System.Drawing;
@@ -14,6 +15,12 @@ namespace MLtest
         {
             _mlContext = new MLContext();
             _predictor = _mlContext.Model.CreatePredictionEngine<ImageNetData, ImagePrediction>(trainedModel);
+        }
+
+        public Predictor(MLProcessData state)
+        {
+            _mlContext = new();
+            _predictor = _mlContext.Model.CreatePredictionEngine<ImageNetData, ImagePrediction>(state.Model);
         }
         public ImagePrediction Predict(Bitmap image)
         {
