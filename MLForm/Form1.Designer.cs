@@ -52,7 +52,7 @@
             this.btnUpload.TabIndex = 0;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            this.btnUpload.Click += new System.EventHandler(this.BtnUpload_Click);
             // 
             // label1
             // 
@@ -85,7 +85,7 @@
             this.btnDetect.TabIndex = 3;
             this.btnDetect.Text = "Detect Objects";
             this.btnDetect.UseVisualStyleBackColor = true;
-            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
+            this.btnDetect.Click += new System.EventHandler(this.BtnDetect_Click);
             // 
             // pbMLd
             // 

@@ -17,40 +17,31 @@ namespace MLForm.MLModel
             "refrigerator", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush" 
         };
 
-        public void Run(string modelPath, string inputPath, string outputPath, out Bitmap bm)
+        public static void Run(string modelPath, string inputPath, string outputPath, out Bitmap bm)
         {
-            List<Bitmap> predictedImages = new List<Bitmap>();
+            List<Bitmap> predictedImages = new();
             Trainer trainer = new();
             // build and train model
             ITransformer? trainedModel = trainer.ApplyModel(modelPath);
             //create predictor
             Predictor predictor = new(trainedModel);
             //run predictions
-            DirectoryInfo di = new DirectoryInfo(inputPath);
+            DirectoryInfo di = new(inputPath);
             FileInfo[] images = di.GetFiles("ML_*.*");
             foreach (FileInfo file in images)
             {
-                using (Bitmap img = new Bitmap(Image.FromFile(Path.Combine(inputPath, file.Name))))
+                using (Bitmap img = new(Image.FromFile(Path.Combine(inputPath, file.Name))))
                 {
                     ImagePrediction prediction = predictor.Predict(img);
                     IReadOnlyList<Result> results = prediction.GetResults(_classNames);
                     predictedImages.Add( new Bitmap(DrawResults.Draw(results, img)));
                 }
             }
-            bm = predictedImages.FirstOrDefault();
-            DirectoryInfo dio = new DirectoryInfo(outputPath);
+            bm = predictedImages.FirstOrDefault() ?? new Bitmap(1,1) { Tag = "Predict=0" };
+            DirectoryInfo dio = new(outputPath);
             foreach (Bitmap image in predictedImages)
             {
-                string ext = "";
-                if (image.RawFormat == ImageFormat.Jpeg)
-                {
-                    ext = "jpg";
-                }
-                else if (image.RawFormat == ImageFormat.Png)
-                {
-                    ext = "png";
-                }
-                string imgstr = outputPath + $"\\ML_IMG_{dio.GetFiles().Count()+1}.jpg";
+                string imgstr = outputPath + $"\\ML_IMG_{dio.GetFiles().Length+1}.jpg";
                 image.Save(imgstr, image.RawFormat);
             }
             //done

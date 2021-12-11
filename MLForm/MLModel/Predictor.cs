@@ -7,8 +7,8 @@ namespace MLtest
 {
     public class Predictor
     {
-        private MLContext _mlContext;
-        private PredictionEngine<ImageNetData, ImagePrediction> _predictor;
+        private readonly MLContext _mlContext;
+        private readonly PredictionEngine<ImageNetData, ImagePrediction> _predictor;
 
         public Predictor(ITransformer trainedModel)
         {

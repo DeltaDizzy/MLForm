@@ -25,7 +25,8 @@ namespace MLtest.DataModel
         private const float _scoreThreshold = 0.5f;
         private const float _iouThreshold = 0.5f;
 
-        private static Color[] classColors = new Color[]
+        //TODO: Implement Category Colors?
+        private readonly static Color[] classColors = new Color[]
         {
             Color.Khaki,
             Color.Fuchsia,
@@ -168,7 +169,7 @@ namespace MLtest.DataModel
         /// Performs Non-Maximum Suppression
         /// </summary>
         /// <returns>List of Results</returns>
-        private List<Result> NMS(List<float[]> postProcessedBoundBoxes, string[] categories)
+        private static List<Result> NMS(List<float[]> postProcessedBoundBoxes, string[] categories)
         {
             postProcessedBoundBoxes = postProcessedBoundBoxes.OrderByDescending(x => x[4]).ToList();
             List<Result> resultsNms = new();
@@ -208,7 +209,7 @@ namespace MLtest.DataModel
             return resultsNms;
         }
 
-        private float GetBoxArea(float[] box)
+        private static float GetBoxArea(float[] box)
         {
             return (box[2] - box[0]) * (box[3] - box[1]);
         }
@@ -216,7 +217,7 @@ namespace MLtest.DataModel
         /// <summary>
         /// Intersection-over-union (Jaccard index) of boxes.
         /// </summary>
-        private float BoxIoU(float[] boxes1, float[] boxes2)
+        private static float BoxIoU(float[] boxes1, float[] boxes2)
         {
             var area1 = GetBoxArea(boxes1);
             var area2 = GetBoxArea(boxes2);
@@ -227,7 +228,7 @@ namespace MLtest.DataModel
             return (dx * dy) / (area1 + area2 - (dx * dy));
         }
 
-        private float Sigmoid(float x)
+        private static float Sigmoid(float x)
         {
             return 1f / (1f + (float)Math.Exp(-x));
         }

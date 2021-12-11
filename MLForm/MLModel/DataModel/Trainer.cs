@@ -8,7 +8,7 @@ namespace MLtest.DataModel
 {
     public class Trainer
     {
-        private MLContext _mlContext;
+        private readonly MLContext _mlContext;
 
         public Trainer()
         {
