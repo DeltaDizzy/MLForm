@@ -1,4 +1,5 @@
 ﻿using Microsoft.ML.Data;
+using MLForm.MLModel;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -79,6 +80,7 @@ namespace MLtest.DataModel
         [ColumnName("height")]
         public float ImageHeight { get; set; }
 
+        //TODO: GetResults outputs null list
         public IReadOnlyList<Result> GetResults(string[] categories)
         {
             var postProcessedBoundBoxes = PostProcessBoundBoxes(

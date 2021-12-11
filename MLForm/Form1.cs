@@ -11,6 +11,7 @@ namespace MLForm
         private static DirectoryInfo? inputDir;
         private static DirectoryInfo? outputDir;
         private static string modelPath = "";
+        private static Func<object, bool> NullResultCheck = (p) => { if (p is null) return true; else return false; };
         
         public Form1()
         {
@@ -37,20 +38,14 @@ namespace MLForm
                 .GetDirectories("Assets").FirstOrDefault()
                 .GetFiles("yolov4.onnx").FirstOrDefault()
                 .FullName;
+            inputDir.GetFiles().ToList().ForEach(f => f.Delete());
+            outputDir.GetFiles().ToList().ForEach(f => f.Delete());
 
         }
 
         private void BtnUpload_Click(object sender, EventArgs e)
         {
             //TODO: keep track of the submitted image and only ingest/process that one instead of everything in the folder
-            foreach (var file in inputDir.GetFiles())
-            {
-                file.Delete();
-            }
-            foreach (var file in outputDir.GetFiles())
-            {
-                file.Delete();
-            }
             openFileDialog.InitialDirectory = inputDir.FullName;   
             //MessageBox.Show(openFileDialog.InitialDirectory);
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -71,12 +66,13 @@ namespace MLForm
                 Image = src,
                 ModelPath = Form1.modelPath,
                 InputPath = inputDir.FullName,
-                OutputPath = outputDir.FullName,
-                NextStage = MLProcessData.MLStage.MLExecutor
+                OutputPath = outputDir.FullName
+                //NextStage = MLProcessData.MLStage.MLExecutor
             };
             MLProcessData endState = MLExecutor.Start(startState);
-            MLExecutor.Run(modelPath, inputDir.FullName, outputDir.FullName, out Bitmap dst);
-            pbMLd.Image = dst;
+            //MLExecutor.Run(modelPath, inputDir.FullName, outputDir.FullName, out Bitmap dst);
+            pbMLd.Image = endState.Image;
+            lblPredict.Text = $"Predictions: {(NullResultCheck(endState.Results) ? 0 : endState.Results.Count)}";
             //pbMLd.Image = endState.image;
         }
     }

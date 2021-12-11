@@ -34,6 +34,7 @@
             this.pbFresh = new System.Windows.Forms.PictureBox();
             this.btnDetect = new System.Windows.Forms.Button();
             this.pbMLd = new System.Windows.Forms.PictureBox();
+            this.lblPredict = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbFresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMLd)).BeginInit();
             this.SuspendLayout();
@@ -97,11 +98,21 @@
             this.pbMLd.TabIndex = 4;
             this.pbMLd.TabStop = false;
             // 
+            // lblPredict
+            // 
+            this.lblPredict.AutoSize = true;
+            this.lblPredict.Location = new System.Drawing.Point(389, 282);
+            this.lblPredict.Name = "lblPredict";
+            this.lblPredict.Size = new System.Drawing.Size(103, 25);
+            this.lblPredict.TabIndex = 5;
+            this.lblPredict.Text = "Predictions:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 538);
+            this.Controls.Add(this.lblPredict);
             this.Controls.Add(this.pbMLd);
             this.Controls.Add(this.btnDetect);
             this.Controls.Add(this.pbFresh);
@@ -125,5 +136,6 @@
         private PictureBox pbFresh;
         private Button btnDetect;
         private PictureBox pbMLd;
+        private Label lblPredict;
     }
 }

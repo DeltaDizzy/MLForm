@@ -22,7 +22,7 @@
         /// </summary>
         public Color Color { get; }
 
-        public Result(float[] boundingBox, string label, float confidence, Color color)
+        public Result(float[] boundingBox, string label, float confidence)
         {
             BoundingBox = boundingBox;
             Label = label;

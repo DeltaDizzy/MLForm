@@ -3,33 +3,47 @@ using Microsoft.ML;
 using static Microsoft.ML.Transforms.Image.ImageResizingEstimator;
 using System.Collections.Generic;
 using MLtest.DataStructures;
+using MLForm.MLModel;
 
 namespace MLtest.DataModel
 {
     public class Trainer
     {
-        private readonly MLContext _mlContext;
-
+        private readonly MLContext mlContext;
+        private MLProcessData state;
         public Trainer()
         {
-            _mlContext = new MLContext();
+            mlContext = new();
+        }
+
+        public Trainer(MLProcessData inputState)
+        {
+            mlContext = new();
+            state = inputState;
+        }
+
+        public MLProcessData Start()
+        {
+            state.Model = ApplyModel(state.ModelPath);
+            Predictor predictor = new(state);
+            return predictor.Start();
         }
 
         public ITransformer ApplyModel(string modelPath)
         {
-            var pipeline = _mlContext.Transforms
+            var pipeline = mlContext.Transforms
                 .ResizeImages(
                     inputColumnName: "image",
                     outputColumnName: "input_1:0",
                     imageWidth: ImageNetSettings.imageWidth,
                     imageHeight: ImageNetSettings.imageHeight,
                     resizing: ResizingKind.IsoPad)
-                .Append(_mlContext.Transforms
+                .Append(mlContext.Transforms
                     .ExtractPixels(
                         outputColumnName: "input_1:0",
                         scaleImage: 1f / 255f,
                         interleavePixelColors: true))
-                .Append(_mlContext.Transforms.ApplyOnnxModel(
+                .Append(mlContext.Transforms.ApplyOnnxModel(
                     outputColumnNames: new[]
                     {
                         "Identity:0",
@@ -51,7 +65,7 @@ namespace MLtest.DataModel
                     gpuDeviceId: null,
                     fallbackToCpu: false
                     ));
-            return pipeline.Fit(_mlContext.Data.LoadFromEnumerable(new List<ImageNetData>()));
+            return pipeline.Fit(mlContext.Data.LoadFromEnumerable(new List<ImageNetData>()));
         }
     }
 }
