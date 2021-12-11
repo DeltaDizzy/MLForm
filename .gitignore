@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/MLForm/Assets/InputImages
+/MLForm/Assets/OutputImages
+/MLForm/Assets

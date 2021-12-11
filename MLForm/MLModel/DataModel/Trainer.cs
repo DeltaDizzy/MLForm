@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.ML;
-using static MLtest.Trainer;
 using static Microsoft.ML.Transforms.Image.ImageResizingEstimator;
 using System.Collections.Generic;
 using MLtest.DataStructures;
 
 namespace MLtest.DataModel
 {
-    public partial class Trainer
+    public class Trainer
     {
         private MLContext _mlContext;
 

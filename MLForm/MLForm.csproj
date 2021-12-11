@@ -11,7 +11,6 @@
   <ItemGroup>
     <Folder Include="Assets\InputImages\" />
     <Folder Include="Assets\OutputImages\" />
-    <Folder Include="MLModel\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +21,7 @@
     <PackageReference Include="Microsoft.ML" Version="1.7.0" />
     <PackageReference Include="Microsoft.ML.ImageAnalytics" Version="1.7.0" />
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.10.0" />
+    <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="1.7.0" />
   </ItemGroup>
 
 </Project>

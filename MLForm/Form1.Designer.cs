@@ -45,9 +45,10 @@
             // btnUpload
             // 
             this.btnUpload.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnUpload.Location = new System.Drawing.Point(272, 67);
+            this.btnUpload.Location = new System.Drawing.Point(389, 112);
+            this.btnUpload.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(97, 42);
+            this.btnUpload.Size = new System.Drawing.Size(139, 70);
             this.btnUpload.TabIndex = 0;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
@@ -57,48 +58,56 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(191, 9);
+            this.label1.Location = new System.Drawing.Point(273, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(277, 25);
+            this.label1.Size = new System.Drawing.Size(428, 40);
             this.label1.TabIndex = 1;
             this.label1.Text = "Object Detection with ML.NET";
             // 
             // pbFresh
             // 
-            this.pbFresh.Location = new System.Drawing.Point(25, 67);
+            this.pbFresh.Location = new System.Drawing.Point(36, 112);
+            this.pbFresh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbFresh.Name = "pbFresh";
-            this.pbFresh.Size = new System.Drawing.Size(241, 239);
+            this.pbFresh.Size = new System.Drawing.Size(344, 398);
+            this.pbFresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbFresh.TabIndex = 2;
             this.pbFresh.TabStop = false;
             // 
             // btnDetect
             // 
             this.btnDetect.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDetect.Location = new System.Drawing.Point(272, 115);
+            this.btnDetect.Location = new System.Drawing.Point(389, 192);
+            this.btnDetect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDetect.Name = "btnDetect";
-            this.btnDetect.Size = new System.Drawing.Size(97, 42);
+            this.btnDetect.Size = new System.Drawing.Size(139, 70);
             this.btnDetect.TabIndex = 3;
             this.btnDetect.Text = "Detect Objects";
             this.btnDetect.UseVisualStyleBackColor = true;
+            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
             // 
             // pbMLd
             // 
-            this.pbMLd.Location = new System.Drawing.Point(375, 67);
+            this.pbMLd.Location = new System.Drawing.Point(536, 112);
+            this.pbMLd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbMLd.Name = "pbMLd";
-            this.pbMLd.Size = new System.Drawing.Size(241, 239);
+            this.pbMLd.Size = new System.Drawing.Size(344, 398);
+            this.pbMLd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbMLd.TabIndex = 4;
             this.pbMLd.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 323);
+            this.ClientSize = new System.Drawing.Size(899, 538);
             this.Controls.Add(this.pbMLd);
             this.Controls.Add(this.btnDetect);
             this.Controls.Add(this.pbFresh);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnUpload);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pbFresh)).EndInit();

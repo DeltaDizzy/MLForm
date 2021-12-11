@@ -11,8 +11,7 @@ namespace MLtest
 {
     public static class DrawResults
     {
-        public static void Draw(string imageOutputFolder, string imageName,
-            IReadOnlyList<Result> results, Bitmap image)
+        public static Bitmap Draw(IReadOnlyList<Result> results, Bitmap image)
         {
             using (var graphics = Graphics.FromImage(image))
             {
@@ -33,10 +32,8 @@ namespace MLtest
                     graphics.DrawString(result.Label + " " + result.Confidence.ToString("0.00"),
                                  new Font("Arial", 12), Brushes.Blue, new PointF(x1, y1));
                 }
-
-                image.Save(Path.Combine(imageOutputFolder, Path.ChangeExtension(imageName, "_yoloed"
-                                        + Path.GetExtension(imageName))));
             }
+            return image;
         }
     }
 }

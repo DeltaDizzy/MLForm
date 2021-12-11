@@ -15,7 +15,7 @@ namespace MLtest
             _mlContext = new MLContext();
             _predictor = _mlContext.Model.CreatePredictionEngine<ImageNetData, ImagePrediction>(trainedModel);
         }
-        private ImagePrediction Predict(Bitmap image)
+        public ImagePrediction Predict(Bitmap image)
         {
             return _predictor.Predict(new ImageNetData()
             {
