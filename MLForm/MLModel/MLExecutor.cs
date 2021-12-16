@@ -2,6 +2,7 @@
 using MLtest;
 using MLtest.DataModel;
 using System.Drawing.Imaging;
+using System.Linq;
 
 namespace MLForm.MLModel
 {
@@ -28,14 +29,12 @@ namespace MLForm.MLModel
             //run predictions
             DirectoryInfo di = new(inputPath);
             FileInfo[] images = di.GetFiles("ML_*.*");
-            foreach (FileInfo file in images)
+            FileInfo file = (from f in images where f.Name.Contains($"ML_{images.Length}") select f).ToList().FirstOrDefault() ?? images.OrderBy(x => x.Name).Last();
+            using (Bitmap img = new(Image.FromFile(Path.Combine(inputPath, file.Name))))
             {
-                using (Bitmap img = new(Image.FromFile(Path.Combine(inputPath, file.Name))))
-                {
-                    ImagePrediction prediction = predictor.Predict(img);
-                    IReadOnlyList<Result> results = prediction.GetResults(_classNames);
-                    predictedImages.Add( new Bitmap(DrawResults.Draw(results, img)));
-                }
+                ImagePrediction prediction = predictor.Predict(img);
+                IReadOnlyList<Result> results = prediction.GetResults(_classNames);
+                predictedImages.Add(new Bitmap(DrawResults.Draw(results, img)));
             }
             bm = predictedImages.FirstOrDefault() ?? new Bitmap(1,1) { Tag = "Predict=0" };
             DirectoryInfo dio = new(outputPath);
